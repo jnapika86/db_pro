@@ -1,0 +1,84 @@
+!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Rock Paper Scissors Game</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f0f4f8;
+      text-align: center;
+      padding: 50px;
+    }
+
+    h1 {
+      color: #333;
+    }
+
+    .choices {
+      margin: 20px 0;
+    }
+
+    .choice {
+      font-size: 20px;
+      padding: 10px 20px;
+      margin: 10px;
+      cursor: pointer;
+      border: 2px solid #333;
+      border-radius: 10px;
+      background: #fff;
+      transition: background 0.3s;
+    }
+
+    .choice:hover {
+      background: #e0e0e0;
+    }
+
+    .result, .score {
+      font-size: 18px;
+      margin-top: 20px;
+      color: #444;
+    }
+  </style>
+</head>
+<body>
+  <h1>Rock Paper Scissors</h1>
+
+  <div class="choices">
+    <button class="choice" onclick="playGame('rock')">🪨 Rock</button>
+    <button class="choice" onclick="playGame('paper')">📄 Paper</button>
+    <button class="choice" onclick="playGame('scissors')">✂️ Scissors</button>
+  </div>
+
+  <div class="result" id="result"></div>
+  <div class="score" id="score">Player: 0 | Computer: 0</div>
+
+  <script>
+    let playerScore = 0;
+    let computerScore = 0;
+
+    function playGame(playerChoice) {
+      const choices = ['rock', 'paper', 'scissors'];
+      const computerChoice = choices[Math.floor(Math.random() * 3)];
+      let result = '';
+
+      if (playerChoice === computerChoice) {
+        result = "It's a draw!";
+      } else if (
+        (playerChoice === 'rock' && computerChoice === 'scissors') ||
+        (playerChoice === 'scissors' && computerChoice === 'paper') ||
+        (playerChoice === 'paper' && computerChoice === 'rock')
+      ) {
+        result = `You Win! ${playerChoice} beats ${computerChoice}.`;
+        playerScore++;
+      } else {
+        result = `You Lose! ${computerChoice} beats ${playerChoice}.`;
+        computerScore++;
+      }
+
+      document.getElementById('result').innerText = result;
+      document.getElementById('score').innerText = `Player: ${playerScore} | Computer: ${computerScore}`;
+    }
+  </script>
+</body>
+</html>
